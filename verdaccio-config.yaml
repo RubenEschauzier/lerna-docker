@@ -2,7 +2,7 @@ storage: /tmp/verdaccio/storage
 plugins: ./plugins
 
 web:
-  enable: false
+  enable: true
   title: Verdaccio
 
 auth:
@@ -12,12 +12,12 @@ auth:
 packages:
   '@*/*':
     access: $all
-    publish: $authenticated
-    proxy: npmjs
+    publish: $all
+    proxy: None
   '**':
     access: $all
-    publish: $authenticated
-    proxy: npmjs
+    publish: $all
+    proxy: None
 
 server:
   keepAliveTimeout: 60
@@ -26,5 +26,6 @@ middlewares:
   audit:
     enabled: true
 
+max_body_size: 200mb 
 logs:
   - {type: stdout, format: pretty, level: error}

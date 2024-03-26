@@ -40,8 +40,8 @@ verdaccio --config $tool_dir/verdaccio-config.yaml &
 sleep 1
 REGISTRY_PID=$!
 npm-cli-adduser --registry http://localhost:4873 --username lerna --password lerna --email lerna@example.org
-npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
 
+npx lerna exec -- npm publish --registry http://localhost:4873 --force
 # If we run on Mac or WSL we use docker internal
 if ([ -f "/proc/version" ] && [[ $(grep -i Microsoft /proc/version) ]]) ||  [ "$(uname)" == "Darwin" ]; then
     NPM_REGISTRY="http://host.docker.internal:4873/"

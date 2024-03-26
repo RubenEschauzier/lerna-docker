@@ -2,7 +2,7 @@ storage: /tmp/verdaccio/storage
 plugins: ./plugins
 
 web:
-  enable: false
+  enable: true
   title: Verdaccio
 
 auth:
@@ -16,12 +16,12 @@ uplinks:
 packages:
   '@*/*':
     access: $all
-    publish: $authenticated
-    proxy: npmjs
+    publish: $all
+    proxy: None
   '**':
     access: $all
-    publish: $authenticated
-    proxy: npmjs
+    publish: $all
+    proxy: None
 
 server:
   keepAliveTimeout: 60
