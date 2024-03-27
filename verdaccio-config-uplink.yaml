@@ -2,7 +2,7 @@ storage: /tmp/verdaccio/storage
 plugins: ./plugins
 
 web:
-  enable: false
+  enable: true
   title: Verdaccio
 
 auth:
@@ -14,15 +14,31 @@ uplinks:
     url: https://registry.npmjs.org/
 
 packages:
-  '@*/*':
+  '@comunica/query-sparql-solid':
     access: $all
     publish: $authenticated
     proxy: npmjs
-  '**':
+    
+  '@comunica/config-query-sparql-solid':
     access: $all
     publish: $authenticated
     proxy: npmjs
 
+  '@comunica/actor-http-inrupt-solid-client-authn':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+  '@*/*':
+    access: $all
+    publish: $authenticated
+
+  '**':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  
+    
 server:
   keepAliveTimeout: 60
 
@@ -34,5 +50,4 @@ logs:
   - {type: stdout, format: pretty, level: error}
 
 listen:
-  - localhost:4873
   - 0.0.0.0:4873

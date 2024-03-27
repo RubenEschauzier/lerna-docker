@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Validate input arguments
-if [[ $# -ne 3 && $# -ne 2 ]]; then
+if [[ $# -ne 4 && $# -ne 2 ]]; then
     echo "Incorrect input arguments"
     echo "Usage: lerna-docker my-docker-organization build|push [version-tag]"
     exit 1
@@ -43,6 +43,15 @@ npm-cli-adduser --registry http://localhost:4873 --username lerna --password ler
 npm-cli-login -r http://localhost:4873 -u lerna -p lerna -e lerna@example.org
 npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
 
+# If additional directory is given (like a local dependency), it will also publish these files
+originalWD=$PWD
+if [[ $4 ]]; then
+    echo $4
+    cd $4
+    npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
+    cd $originalWD
+fi
+
 # If we run on Mac or WSL we use docker internal
 if ([ -f "/proc/version" ] && [[ $(grep -i Microsoft /proc/version) ]]) ||  [ "$(uname)" == "Darwin" ]; then
     NPM_REGISTRY="http://host.docker.internal:4873/"
@@ -63,6 +72,7 @@ function finish {
 trap finish EXIT
 
 # Build images for all packages with a Dockerfile, and optionally push them
+echo ${packages/*} ${engines/*}
 for package in packages/* engines/*; do
     if [ -f $package/Dockerfile ]; then
         imagename="$org/"$(echo $package | sed "s/[^\/]*\///")
