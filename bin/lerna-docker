@@ -32,6 +32,7 @@ else
     fi
 fi
 echo "Building images with tag $VERSION"
+echo $4
 
 # Set up a temporary npm registry on http://localhost:4873 in which we publish all current lerna packages
 mkdir -p /tmp/verdaccio/storage
@@ -41,13 +42,14 @@ sleep 1
 REGISTRY_PID=$!
 npm-cli-adduser --registry http://localhost:4873 --username lerna --password lerna --email lerna@example.org
 npm-cli-login -r http://localhost:4873 -u lerna -p lerna -e lerna@example.org
-npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
+npx lerna exec -- npm publish --silent --registry http://localhost:4873 
 
 # If additional directory is given (like a local dependency), it will also publish these files
 originalWD=$PWD
 if [[ $4 ]]; then
+    echo "BUILDING THIS HERE"
     echo $4
-    cd $4
+    cd "$4"
     npx lerna exec -- npm publish --silent --registry http://localhost:4873 > /dev/null
     cd $originalWD
 fi

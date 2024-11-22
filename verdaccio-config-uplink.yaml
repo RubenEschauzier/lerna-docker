@@ -32,6 +32,7 @@ packages:
   '@*/*':
     access: $all
     publish: $authenticated
+    proxy: npmjs
 
   '**':
     access: $all
@@ -46,7 +47,7 @@ middlewares:
   audit:
     enabled: true
 
-logs:
+log:
   - {type: stdout, format: pretty, level: error}
 
 listen:

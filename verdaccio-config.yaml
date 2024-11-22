@@ -42,7 +42,7 @@ middlewares:
   audit:
     enabled: true
 
-logs:
+log:
   - {type: stdout, format: pretty, level: error}
 
 listen:
