@@ -61,6 +61,13 @@ Build all Dockerfiles that can be found in `packages/*`:
 $ lerna-docker my-docker-organization build [version-tag]
 ```
 
+If you want to include a local version of a package your lerna repository relies on, you can add the _absolute_
+path as follows:
+
+```bash
+$ lerna-docker my-docker-organization build [version-tag] [path-to-local-version]
+```
+
 ### Pushing
 
 Pushing all images to Docker hub based on the Dockerfiles that can be found in `packages/*`:
