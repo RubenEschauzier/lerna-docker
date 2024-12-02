@@ -48,7 +48,7 @@ middlewares:
     enabled: true
 
 log:
-  - {type: stdout, format: pretty, level: error}
+  - {type: stdout, format: pretty, level: info}
 
 listen:
   - 0.0.0.0:4873

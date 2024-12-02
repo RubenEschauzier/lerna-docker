@@ -80,6 +80,10 @@ If you want to push in a CI environment,
 you will have to log in to a Docker Hub account,
 which can be done by setting the (secret) environment variables `DOCKER_USERNAME` and `DOCKER_PASSWORD`.
 
+### Troubleshooting
+One possible issue is from Docker v4.31.0 host.docker.internal resolves to an IPv6 address [github](https://github.com/docker/for-mac/issues/7332).
+This causes the Verdaccio repository to be unavailable. Lower versions of Docker do work. 
+
 ## License
 This code is copyrighted by [Ghent University – imec](http://idlab.ugent.be/)
 and released under the [MIT license](http://opensource.org/licenses/MIT).
